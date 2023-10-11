@@ -19,13 +19,14 @@ RUN apt-get update && apt-get install -y \
     sox \
     locales \
     megatools \
+    libmediainfo-dev \
   && rm -rf /var/lib/apt/lists/*
 
 RUN wget -q -O /tmp/libzen0v5.deb http://th.archive.ubuntu.com/ubuntu/pool/universe/libz/libzen/libzen0v5_0.4.40-1_amd64.deb \
   && dpkg -i /tmp/libzen0v5.deb \
   && rm /tmp/libzen0v5.deb
 
-RUN wget -q -O /tmp/libmediainfo0v5.deb http://ftp.de.debian.org/debian/pool/main/libm/libmediainfo/libmediainfo0v5_22.12+dfsg-1_amd64.deb \
+RUN wget -q -O /tmp/libmediainfo0v5.deb http://launchpadlibrarian.net/643009578/libmediainfo0v5_22.12+dfsg-1_amd64.deb \
   && dpkg -i /tmp/libmediainfo0v5.deb \
   && rm /tmp/libmediainfo0v5.deb
 
