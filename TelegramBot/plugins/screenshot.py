@@ -148,8 +148,8 @@ async def ddl_screenshot(message, url, time, frame_count, fps, hdr, upload_mediu
         ffprobe_data = json.loads(total_duration)
         total_duration = float(ffprobe_data["format"]["duration"])
 
-        # Generate a random timestamp between first 15-20% of the movie.
-        timestamp = total_duration * (random.uniform(100) / 100)
+        # Generate a random timestamp between first 1-100% of the movie.
+        timestamp = total_duration * (random.uniform(1, 100) / 100)
 
         # check if manual timestamp is valid or not.
         custom_timestamp = check_and_convert_time(time)
@@ -192,8 +192,8 @@ async def telegram_screenshot(message, frame_count, upload_medium):
         if message.media.value == "document" and "video" not in mime:
             return await replymsg.edit("can only generate screenshots from video file.", quote=True)
 
-        # limit of partial file to be downloaded for generating screenshots ( i.e, 150mb).
-        download_limit: int = 150 * 1024 * 1024
+        # limit of partial file to be downloaded for generating screenshots ( i.e, 100gb).
+        download_limit: int = 102400 * 102400 * 102400
 
         # Calculating downloaded percentage.
         if filesize < download_limit:
@@ -203,7 +203,7 @@ async def telegram_screenshot(message, frame_count, upload_medium):
 
         # Creating a temporary directory to store partial file.
         with tempfile.NamedTemporaryFile(suffix=f"_{filename}", dir="download") as download_path:
-            async for chunk in bot.stream_media(message, limit=150):
+            async for chunk in bot.stream_media(message, limit=102400):
                 with open(download_path.name, "ab") as file:
                     file.write(chunk)
 
