@@ -149,7 +149,7 @@ async def ddl_screenshot(message, url, time, frame_count, fps, hdr, upload_mediu
         total_duration = float(ffprobe_data["format"]["duration"])
 
         # Generate a random timestamp between first 15-20% of the movie.
-        timestamp = total_duration * (random.uniform(15, 20) / 100)
+        timestamp = total_duration * (random.uniform(100) / 100)
 
         # check if manual timestamp is valid or not.
         custom_timestamp = check_and_convert_time(time)
