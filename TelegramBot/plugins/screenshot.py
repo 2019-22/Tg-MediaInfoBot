@@ -105,8 +105,8 @@ async def gdrive_screenshot(message, url, time, frame_count, fps, hdr, upload_me
         ffprobe_data = json.loads(total_duration)
         total_duration = float(ffprobe_data["format"]["duration"])
 
-        # Generate a random timestamp between first 15-20% of the movie.
-        timestamp = total_duration * (random.uniform(15, 20) / 100)
+        # Generate a random timestamp between first 1-100% of the movie.
+        timestamp = total_duration * (random.uniform(1, 100) / 100)
 
         # check if manual timestamp is valid or not.
         custom_timestamp = check_and_convert_time(time)
